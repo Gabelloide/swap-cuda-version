@@ -1,21 +1,21 @@
 $baseCudaPath = "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA"
 
 if (Test-Path $baseCudaPath) {
-    Write-Host "🔍 Recherche des versions de CUDA installées..." -ForegroundColor Cyan
+    Write-Host "🔍 Looking for installed cuda versions..." -ForegroundColor Cyan
     
     $versions = Get-ChildItem -Path $baseCudaPath -Directory | Where-Object { $_.Name -match '^v\d+\.\d+' }
     
     if ($versions.Count -gt 0) {
-        Write-Host "Versions trouvées :" -ForegroundColor Green
+        Write-Host "Versions found :" -ForegroundColor Green
         foreach ($v in $versions) {
             $cleanVersion = $v.Name.Substring(1)
             Write-Host "  • $cleanVersion"
         }
     } else {
-        Write-Warning "Aucune version de CUDA détectée dans $baseCudaPath"
+        Write-Warning "No CUDA version found at $baseCudaPath"
     }
 } else {
-    Write-Warning "Le dossier racine CUDA ($baseCudaPath) n'existe pas."
+    Write-Warning "Base CUDA directory ($baseCudaPath) does not exist."
 }
 Write-Host ""
 # ---------------------------------------------------
